@@ -54,6 +54,9 @@
 	:global([data-accordion-item] button[disabled]) {
 		cursor: default;
 	}
+	:global([data-accordion-item] button[disabled]::before) {
+		content:none;
+	}
 	:global([data-accordion-item] [role="region"]) {
 		padding: 2rem;
 	}
