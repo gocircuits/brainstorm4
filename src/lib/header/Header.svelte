@@ -1,12 +1,12 @@
 <script>
-	import { page } from "$app/stores";
+	import { page } from '$app/stores';
 	// import logo from './brainstorm-logo.svg';
 	import logo from './brainstorm-logo-new.svg';
-	import { onMount } from "svelte";
+	// import { onMount } from "svelte";
 	// let location = 33;
 	// let direction = "right";
 	// let color="orange";
-	
+
 	// const orbit = setInterval(() => {
 	// 	if (direction == "right") {
 	// 		if (location <= 93) {
@@ -28,17 +28,17 @@
 
 	// List of navigation items
 	const navItems = [
-		{ label: "Home", href: "/"},
-		{ label: "Products", href: "/products"},
-		{ label: "Company", href: "/company"},
-		{ label: "Purchase", href: "/purchase"},
-		{ label: "FAQ", href: "/faq"},
-		{ label: "Contact", href: "/contact"},
+		{ label: 'Home', href: '/' },
+		{ label: 'Products', href: '/products' },
+		{ label: 'Company', href: '/company' },
+		{ label: 'Purchase', href: '/purchase' },
+		{ label: 'FAQ', href: '/faq' },
+		{ label: 'Contact', href: '/contact' }
 	];
-
 
 	// Mobile menu click event handler
 	const handleMobileIconClick = () => (showMobileMenu = !showMobileMenu);
+	const handleMobileMenuClick = () => (showMobileMenu = false);
 
 	// Media match query handler
 	const mediaQueryHandler = (e) => {
@@ -48,18 +48,18 @@
 		}
 	};
 
-	// Attach media query listener on mount hook
-	onMount(() => {
-		const mediaListener = window.matchMedia("(max-width: 767px)");
+	// // Attach media query listener on mount hook
+	// onMount(() => {
+	// 	const mediaListener = window.matchMedia("(max-width: 767px)");
 
-		mediaListener.addListener(mediaQueryHandler);
-	});
+	// 	mediaListener.addListener(mediaQueryHandler);
+	// });
 </script>
 
-<header id="header">
+<header id="header" class:mobile={showMobileMenu}>
 	<h1 class="logo">
 		<a href="/">
-			<img  id="logo" src={logo} alt="BrainStorm" />
+			<img id="logo" src={logo} alt="BrainStorm" />
 			<!-- <svg
 				version="1.1"
 				id="Layer_1"
@@ -105,21 +105,20 @@
 					<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#moon" />
 				{/if}
 			</svg> -->
-					</a>
+		</a>
 	</h1>
 
 	<nav>
-		<div
-			on:click={handleMobileIconClick}
-			class={`mobile-icon${showMobileMenu ? " active" : ""}`}
-		>
+		<div on:click={handleMobileIconClick} class={`mobile-icon${showMobileMenu ? ' active' : ''}`}>
 			<div class="middle-line" />
 		</div>
-		<ul class={`navbar-list${showMobileMenu ? " mobile" : ""}`}>
+		<ul class={`navbar-list${showMobileMenu ? ' mobile' : ''}`}>
 			{#each navItems as item}
 				<li>
-					<a class:active={$page.path === item.href} href={item.href}
-						>{item.label}</a
+					<a
+						on:click={handleMobileMenuClick}
+						class:active={$page.path === item.href}
+						href={item.href}>{item.label}</a
 					>
 				</li>
 			{/each}
@@ -213,7 +212,7 @@
 		height: 10px;
 		border-radius: 50%;
 		background: white;
-		content: "";
+		content: '';
 		opacity: 0;
 		-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
 		-moz-transition: -moz-transform 0.3s, opacity 0.3s;
@@ -221,6 +220,10 @@
 		-webkit-transform: translateX(-50%) translateY(-50%) scale(0.2);
 		-moz-transform: translateX(-50%) translateY(-50%) scale(0.2);
 		transform: translateX(-50%) translateY(-50%) scale(0.2);
+	}
+	#header.mobile nav a::before {
+		top: 50%;
+		left: -5%;
 	}
 
 	#header nav a::after {
@@ -282,10 +285,10 @@
 		cursor: pointer;
 	}
 
-	.mobile-icon:after,
-	.mobile-icon:before,
+	.mobile-icon::before,
+	.mobile-icon::after,
 	.middle-line {
-		content: "";
+		content: '';
 		position: absolute;
 		width: 100%;
 		height: 2px;
@@ -294,21 +297,21 @@
 		transform-origin: center;
 	}
 
-	.mobile-icon:before,
+	.mobile-icon::before,
 	.middle-line {
 		top: 0;
 	}
 
-	.mobile-icon:after,
+	.mobile-icon::after,
 	.middle-line {
 		bottom: 0px;
 	}
 
-	.mobile-icon:before {
+	.mobile-icon::before {
 		width: 66%;
 	}
 
-	.mobile-icon:after {
+	.mobile-icon::after {
 		width: 33%;
 	}
 
@@ -316,16 +319,16 @@
 		margin: auto;
 	}
 
-	.mobile-icon:hover:before,
-	.mobile-icon:hover:after,
-	.mobile-icon.active:before,
-	.mobile-icon.active:after,
+	.mobile-icon:hover::before,
+	.mobile-icon:hover::after,
+	.mobile-icon.active::before,
+	.mobile-icon.active::after,
 	.mobile-icon.active .middle-line {
 		width: 100%;
 	}
 
-	.mobile-icon.active:before,
-	.mobile-icon.active:after {
+	.mobile-icon.active::before,
+	.mobile-icon.active::after {
 		top: 50%;
 		transform: rotate(-45deg);
 	}
@@ -343,7 +346,7 @@
 	}
 
 	.navbar-list.mobile {
-		background-color: rgba(0, 0, 0, 0.8);
+		background-color: rgb(0, 0, 0);
 		position: fixed;
 		display: flex;
 		flex-direction: column;
@@ -351,15 +354,19 @@
 		height: calc(100% - 45px);
 		bottom: 0;
 		left: 0;
+		z-index: 1;
 	}
-
+	.mobile li {
+		margin: 0ch;
+		padding-left: 60px;
+	}
 	.navbar-list li {
 		list-style-type: none;
 		position: relative;
 	}
 
-	.navbar-list li:before {
-		content: "";
+	.navbar-list li::before {
+		content: '';
 		position: absolute;
 		bottom: 0;
 		left: 0;
