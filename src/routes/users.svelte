@@ -39,6 +39,10 @@
     width: 130px;
   }
 
+  a{
+    text-decoration: none;
+  }
+  
   a img {
     width: 80%;
     margin: 0 0 10px 0;

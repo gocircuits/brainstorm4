@@ -24,7 +24,7 @@
 			ob = true;
 			break;
 		case 'ae':
-			cis = true;
+			ae = true;
 			break;
 		case 'ps':
 			ps = true;

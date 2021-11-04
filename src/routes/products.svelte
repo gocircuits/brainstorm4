@@ -1,80 +1,19 @@
 <script>
-	import { images } from "$lib/component/screenshots.js";
-	import Slide from "$lib/component/Slide.svelte";
-	import Thumbnail from "$lib/component/Thumbnail.svelte";
-	import Caption from "$lib/component/Caption.svelte";
-
-	/* IMAGE TO SHOW */
-	let imageShowingIndex = 0;
-	// $: console.log(imageShowingIndex);
-	$: image = images[imageShowingIndex];
-
-	const nextSlide = () => {
-		if (imageShowingIndex === images.length - 1) {
-			imageShowingIndex = 0;
-		} else {
-			imageShowingIndex += 1;
-		}
-	};
-
-	const prevSlide = () => {
-		if (imageShowingIndex === 0) {
-			imageShowingIndex = images.length - 1;
-		} else {
-			imageShowingIndex -= 1;
-		}
-	};
-
-	const goToSlide = (number) => (imageShowingIndex = number);
+	import { Accordion, AccordionItem } from 'svelte-accessible-accordion';
 </script>
 
 <svelte:head>
 	<title>BrainStorm Products</title>
 </svelte:head>
-<h2 class="page-title">BrainStorm in Action.</h2>
-<div class="top">
+<h2>BrainStorm in Action.</h2>
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video controls poster="/images/prod-video.png">
 		<source src="/video/bswdemo10a.mp4" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
-	<div class="screenshots">
-		<!-- image gallery -->
-		<div class="container">
-			<Slide
-				image={image.imgurl}
-				altTag={image.name}
-				attr={image.attribution}
-				slideNo={image.id + 1}
-				totalSlides={images.length}
-			/>
-		</div>
-
-		<!-- Image text -->
-		<Caption
-			caption={images[imageShowingIndex].name}
-			on:prevClick={prevSlide}
-			on:nextClick={nextSlide}
-		/>
-
-		<!-- Thumbnail images -->
-		<div class="thumbnails-row">
-			{#each images as { id, imgurl, name, attribution }}
-				<Thumbnail
-					thumbImg={imgurl}
-					altTag={name}
-					titleLink={attribution}
-					{id}
-					selected={imageShowingIndex === id}
-					on:click={() => goToSlide(id)}
-				/>
-			{/each}
-		</div>
-	</div>
-</div>
-<h3>BrainStorm Organizer</h3>
-<div class="feature">
-	<span>The Basics</span>
+<h2>BrainStorm Organizer</h2>
+<Accordion multiselect>
+	<AccordionItem expanded title="The Basics">
 	<ul>
 		<li>The working view of BrainStorm is a heading and a list</li>
 		<li>Any entry in a list can be the heading of its own list</li>
@@ -101,9 +40,8 @@
 			Multiple views
 		</div>
 	</div>
-</div>
-<div class="feature">
-	<span>Grab information and links on the fly</span>
+</AccordionItem>
+<AccordionItem expanded title="Grab information and links on the fly">
 	BrainStorm&#39;s Magic Paste automatically grabs text from the clipboard. This
 	means that all you have to do is highlight and copy material you see on screen.
 	You can use regular copy/paste if you prefer. In both cases, you can set BrainStorm
@@ -120,9 +58,8 @@
 			Pasted into BrainStorm
 		</div>
 	</div>
-</div>
-<div class="feature">
-	<span>Web-publish BrainStorm models</span>
+</AccordionItem>
+<AccordionItem expanded title="Web-publish BrainStorm models">
 	A web-publish button creates an HTML version of your work which is navigable in
 	a similar way to BrainStorm itself. You can even embed extra HTML code to change
 	fonts, add pictures, hotlinks and so on. Another option allows you to switch off
@@ -141,9 +78,8 @@
 			As an outline
 		</div>
 	</div>
-</div>
-<div class="feature">
-	<span>Work with Word (and other programs)</span>
+</AccordionItem>
+<AccordionItem expanded title="Work with Word (and other programs)">
 	You can output your work to other programs through the clipboard or a file. Many
 	programs accept tabbed outlines as an input format. BrainStorm&#39;s File Open
 	command is intelligent enough to extract meaningful information from any file.
@@ -164,9 +100,8 @@
 			In Word outline
 		</div>
 	</div>
-</div>
-<div class="feature">
-	<span>Work with PowerPoint (and other programs)</span>
+</AccordionItem>
+<AccordionItem expanded title="Work with PowerPoint (and other programs)">
 	BrainStorm&#39;s File Open command is intelligent enough to extract meaningful
 	information from any file. It particularly likes outlines because it can re-create
 	the original hierarchy. Exporting to PowerPoint is simply a case of adding an empty
@@ -187,26 +122,44 @@
 			Aerial view
 		</div>
 	</div>
-</div>
-<!-- </div>
-	<div class="product">
-		<img alt="Diary Generator" src="/images/diary.png" />
-		<h3>Diary Generator</h3>
-		<p>
-			Download a free diary generator which complements BrainStorm and other
-			programs
-		</p>
-	</div>
-</div> -->
+</AccordionItem>
+</Accordion>
+
 
 <div class="action-bar">
 	<a href="features">See its core features</a>
 </div>
 
 <style>
-	.top{
-		display: flex;
+		:global([data-accordion]) {
+		list-style: none;
+		margin-bottom: 1rem;
 	}
+	:global([data-accordion-item] button[aria-expanded="false"]::before){
+		content: "+ ";
+	}
+	:global([data-accordion-item] button[aria-expanded="true"]::before){
+		content: "- ";
+	}
+	:global([data-accordion-item] button) {
+		border: 0;
+		border-bottom: 1px solid #e0e0e0;
+		background: none;
+		font: inherit;
+		font-size: var(--fs-600);
+		line-height: inherit;
+		color: inherit;
+		cursor: pointer;
+		padding: 0.5rem 1rem;
+		width: 100%;
+		text-align: left;
+		margin: 0;
+	}
+
+	:global([data-accordion-item] [role='region']) {
+		padding: 2rem;
+	}
+
 	.examples {
 		display: flex;
 		/* flex-direction: column; */
@@ -228,64 +181,46 @@
 		padding-bottom: 10px;
 	}
 
-	/* .products {
-		display: flex;
-		flex-wrap: wrap;
-		margin: 0px;
-		padding: 0px;
-		color: #000; */
-	/* text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35); */
-	/* } */
 
-	/* .product {
-		flex-basis: 450px;
-		padding: 10px;
-		font-size: var(--fs-400);
-		font-weight: 150;
-	} */
-	.feature {
-		border-top: 2px solid blue;
-		padding: 20px;
-	}
-	span {
-		color: blue;
-		display: block;
-		padding-bottom: 10px;
-	}
 
 	ul {
 		margin-top: 2px;
 	}
 	video {
-		margin: 5rem;
-		width: 49vh;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		margin-left: auto;
+		margin-right: auto;
+		width: 60vh;
 	}
 
-	.screenshots {
+	/* .screenshots {
 		width: 49vw;
 		display: flex;
 		flex-direction: column;
 		margin: 10% auto;
 		/* background-color: #222; */
-		box-shadow: 0 0 10px black;
+		/* box-shadow: 0 0 10px black;
 	}
 
 	/* Position the image container (needed to position the left and right arrows) */
-	.container {
+	/* .container {
 		position: relative;
 	}
 
 	.thumbnails-row {
 		width: 100%;
 		display: flex;
-		align-self: flex-end;
-	}
+		align-self: flex-end; 
+	} */ 
 
-	@media only screen and (max-width: 450px) {
-		/* .product {
-			flex-basis: 300px;
-		} */
-
+		@media only screen and (max-width: 835px) {
+		:global([data-accordion]),
+		:global([data-accordion-item] button),
+		:global([data-accordion-item] [role='region']) {
+			padding: 1rem 0rem;
+		}
+	
 		video {
 			width: 300px;
 		}

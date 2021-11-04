@@ -1,86 +1,74 @@
 <script>
   import News  from '$lib/component/faq-data.js'
+  import { Accordion, AccordionItem } from 'svelte-accessible-accordion';
 </script>
 
 <svelte:head>
   <title>BrainStorm FAQ</title>
 </svelte:head>
-<h2 class="page-title">Frequently Asked Questions</h2>
+<h2>Frequently Asked Questions</h2>
 
-<div class="news">
+<Accordion multiselect>
   {#each News as item,i}
-    <div class="news-item">
+  <AccordionItem expanded title={item.title}>
       <!-- <div class='hook-number'>{i+1}</div> -->
       {#if item.href}
       <a href={item.href}>
-        <h3>{item.title}<em>&rarr;</em></h3>
-        <!-- <time>{item.date}</time> -->
         <p>
           {@html item.intro}
         </p>
       </a>
       {:else}
-      <h3>{item.title}</h3>
-      <!-- <time>{item.date}</time> -->
       <p>
         {@html item.intro}
       </p>
       {/if}
-    </div>
+    </AccordionItem>
   {/each}
-</div>
+</Accordion>
 
 <style>
-  .news {
-    padding-top: 1em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    column-gap: 20px;
-    align-content: center;
-    row-gap: 20px;
-  }
+  	:global([data-accordion]) {
+		list-style: none;
+		margin-bottom: 1rem;
+	}
+	:global([data-accordion-item] button[aria-expanded='false']::before) {
+		content: '+ ';
+	}
+	:global([data-accordion-item] button[aria-expanded='true']::before) {
+		content: '- ';
+	}
+	:global([data-accordion-item] button) {
+		border: 0;
+		border-bottom: 1px solid #e0e0e0;
+		background: none;
+		font: inherit;
+		font-size: var(--fs-600);
+		line-height: inherit;
+		color: inherit;
+		cursor: pointer;
+		padding: 0.5rem 1rem;
+		width: 100%;
+		text-align: left;
+		margin: 0;
+	}
 
-  .news-item {
-    padding: 5px;
-    flex-basis: 300px;
-    justify-content: left;
-    /* background-color: oldlace;
-    
-    border: rgba(96, 87, 70, 0.6);
-    border-style: solid;
-    border-width: 1px; */
-    align-items: center;
-    border-radius: 1rem;
-  }
-  .news-item h3 {
-    color: black;
-    margin: 10px 0px 5px 0px;
-  }
-  .news-item a h3 em {
-    padding: 0 0 0 5px;
-    font-style: normal;
-    font-size: var(--fs-300);
-    font-weight: 300;
-    opacity: 0;
-    transition: all 100ms ease-in-out;
-    -webkit-transition: all 100ms ease-in-out;
-  }
-
-  .news-item a:hover h3 em {
-    /* padding: 0 0 0 10px; */
-    font-weight: 300;
-    opacity: 0.99;
-  }
-
- a{
+	:global([data-accordion-item] [role='region']) {
+		padding: 2rem;
+	}
+	@media only screen and (max-width: 835px) {
+		:global([data-accordion]),
+		:global([data-accordion-item] button),
+		:global([data-accordion-item] [role='region']) {
+			padding: 1rem 0rem;
+		}
+	}
+a{
+  font-size: var(--fs-400);
+  color:black;
   text-decoration: none;
- }
-  
-   p {
-    font-size: var(--fs-300);
-    margin: 20px 0px 0px 0px;
-    color: rgba(0, 0, 0, 0.85);
-    }
-
+}
+a::after{
+  content: "<more>"
+}
 </style>

@@ -20,7 +20,7 @@ const Feat = [
 	},
 	{
 		title: "Capture Ideas",
-        href: "/feature-cis"
+        href: "/features?sect=cis"
 	},
 	{
         href: "/uses-wd?sect=cis"
@@ -36,7 +36,7 @@ const Feat = [
 	},
     {
 		title: "Capture Information",
-        href: "/feature-ci"
+        href: "/features?sect=ci"
 	},
 	{
         href: "/uses-wd?sect=ci"
@@ -52,7 +52,7 @@ const Feat = [
 	},    
 	{
 		title: "Organizing",
-        href: "/feature-ob"
+        href: "/features?sect=ob"
 	},
 	{
         href: "/uses-wd?sect=ob"
@@ -68,7 +68,7 @@ const Feat = [
 	},
     {
 		title: "Add & Enhance",
-        href: "/feature-ae"
+        href: "/features?sect=ae"
 	},
 	{
         href: "/uses-wd?sect=ae"
@@ -84,7 +84,7 @@ const Feat = [
 	},
     {
 		title: "Publish & Share",
-        href: "/feature-ps"
+        href: "/features?sect=ps"
 	},
 	{
         href: "/uses-wd?sect=ps"
@@ -100,7 +100,7 @@ const Feat = [
 	},
     {
 		title: "Instant Recall",
-        href: "/feature-ir"
+        href: "/features?sect=ir"
 	},
 	{
         href: "/uses-wd?sect=ir"
@@ -116,7 +116,7 @@ const Feat = [
 	},    
     {
 		title: "Check Progress",
-        href: "/feature-cp"
+        href: "/features?sect=cp"
 	},
 	{
         href: "/uses-wd?sect=cp"

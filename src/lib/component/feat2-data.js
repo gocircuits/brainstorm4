@@ -17,31 +17,31 @@ const Feat = [
 	},
 	{
 		title: "Capture Ideas",
-        href: "/feature-cis"
+        href: "/features?sect=cis"
 	},
     {
 		title: "Capture Information",
-        href: "/feature-ci"
+        href: "/features?sect=ci"
 	},
 	{
 		title: "Organize Both",
-        href: "/feature-ob"
+        href: "/features?sect=ob"
 	},
     {
 		title: "Add \& Enhance",
-        href: "/feature-ae"
+        href: "/features?sect=ae"
 	},
     {
 		title: "Publish \& Share",
-        href: "/feature-ps"
+        href: "/features?sect=ps"
 	},
     {
 		title: "Instant Recall",
-        href: "/feature-ir"
+        href: "/features?sect=ir"
 	},
     {
 		title: "Check Progress",
-        href: "/feature-cp"
+        href: "/features?sect=cp"
 	}
 ];
 
