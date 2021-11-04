@@ -11,15 +11,13 @@ License Price: $40.00 </h3>
 
        
 <div class="action-bar">
-  <a href="http://brainstormsw.com/buy_paypal.php" target="blank">
-    Buy BrainStorm for Windows</a
-  >
   <a href="http://brainstormsw.com/buy_paypal.php">
-    <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif">
+    <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Paypal Checkout">
+    <br/>Buy BrainStorm for Windows
     </a>
 </div>
 <p class="note">
-  This is a once-only charge which entitles users to upgrades and fixes.
+  This is a one time charge which entitles users to upgrades and fixes.
 </p>
 <p class="note">
   Refund policy: Because BrainStorm is shareware, refunds are only given in the
