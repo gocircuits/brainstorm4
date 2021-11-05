@@ -93,6 +93,7 @@ body {
 .quote br, .review br{
 margin-bottom: 20px;
 }
+
 @media (min-width: 720px) {
 	h1 {
 		font-size: var(--fs-700);

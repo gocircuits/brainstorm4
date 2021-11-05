@@ -39,7 +39,6 @@ if( $decoded['message'] != ''){
 	} else {
 	  $headers = "From: $youremail";
 	}
-	// $secretKey = "6LcvNwUcAAAAAFZqNeBQG_ZOHZ5zEfMnPf-aP0C1";
 	$secretKey = "6Lc9boQcAAAAADymUucrA8vZZwcomTSpmOspVSZN";
 	// post request to server
 	$url =  'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
